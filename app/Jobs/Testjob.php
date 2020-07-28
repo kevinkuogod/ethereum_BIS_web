@@ -140,7 +140,7 @@ class Testjob implements ShouldQueue
                             }elseif((strcmp($trace_asset_in_leagersite_datas_jaon_decode['error'],'ok')!=0)){
                                 // print_r("笑笑就好3");
                                 $update_trace_asset_in_leagersite_json = $TraceController->update_trace_asset_in_leagersite('error', $recode_cur_switch_site_pos_tmp, $asset_RFID_string_tmp, $trace_asset_in_leagersite_datas_jaon_decode['error']);
-                                fwrite($file,"trace_asset_in_leagersite 資料表被串改\n");
+                                fwrite($file,"trace_asset_in_leagersite 資料表被篡改\n");
                                 fwrite($file,"error_message:".$trace_asset_in_leagersite_datas_jaon_decode['error']."\n");
                                 // print('---------------------------------------------------------------------------------------------------');
                             }
@@ -172,8 +172,8 @@ class Testjob implements ShouldQueue
                     fclose($file);
                 }else{
                     //switch_site error
-                    print("switch_site (logout) 資料表被串改");
-                    fwrite($file,"switch_site (logout) 資料表被串改\n");
+                    print("switch_site (logout) 資料表被篡改");
+                    fwrite($file,"switch_site (logout) 資料表被篡改\n");
                     // fwrite($file,'leager_site:'.$switch_site_logout_data['leager_site']."\n");
                     // $camera_id_string = $this->make_array_to_string($switch_site_logout_data['camera_id_array']);
                     // fwrite($file,'camera_id_array:'.$camera_id_string."\n");
@@ -197,8 +197,8 @@ class Testjob implements ShouldQueue
                 }
             }else{
                 //switch_site error
-                print("switch_site (login) 資料表被串改");
-                fwrite($file,"switch_site (login) 資料表被串改"."\n");
+                print("switch_site (login) 資料表被篡改");
+                fwrite($file,"switch_site (login) 資料表被篡改"."\n");
                 // fwrite($file,'leager_site:'.$switch_site_login_data['leager_site']."\n");
                 // $camera_id_string = $this->make_array_to_string($switch_site_login_data['camera_id_array']);
                 // fwrite($file,'camera_id_array:'.$camera_id_string."\n");
@@ -222,8 +222,8 @@ class Testjob implements ShouldQueue
             }
         }else{
             //validation_background_trace_back_job_table error
-            print("background_trace_back_job_table 資料表被串改");
-            fwrite($file,"background_trace_back_job_table 資料表被串改"."\n");
+            print("background_trace_back_job_table 資料表被篡改");
+            fwrite($file,"background_trace_back_job_table 資料表被篡改"."\n");
             // fwrite($file,'leager_site:'.$background_trace_back_job_datas['leager_site']."\n");
             // $error_pos = $this->make_array_to_string($background_trace_back_job_datas['error_pos']);
             // fwrite($file,'error_pos:'.$error_pos."\n");

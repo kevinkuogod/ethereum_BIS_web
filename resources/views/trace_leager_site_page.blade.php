@@ -8,7 +8,7 @@
         <title>測試追朔</title>
     </head>
     <body>
-        <div style="color: #A830FF;border:2px #ccc solid;padding:1% 30% 1% 40%;margin:0% 0% 1% 0%;">追朔系統(供應鏈階段查詢頁面)</div>
+        <div style="color: #A830FF;border:2px #ccc solid;padding:1% 30% 1% 40%;margin:0% 0% 1% 0%;">追溯系統(供應鏈階段查詢頁面)</div>
         <div id="system_error_message"  style="color:#880000;border:2px #ccc solid;padding:10px;;margin:0% 0% 1% 0%;"></div>
         <div>
             <table class="table" id="leager_table" border="1">
@@ -97,7 +97,7 @@
                 let submit_input_obj = document.getElementById('submit_input');
                 submit_input_obj.submit();
             }else if(leager_site_id == 'null'){
-                alert("供應鏈 trace_asset_in_leagersite 資料表被串改");
+                alert("供應鏈 trace_asset_in_leagersite 資料表被篡改");
             }else if(system_error_message_obj.innerText != ""){
                 alert(system_error_message_obj.innerText);
             }
@@ -130,7 +130,7 @@
                     }
                 }
             }else if(leager_site_id == 'null'){
-                alert("供應鏈 trace_asset_in_leagersite 資料表被串改");
+                alert("供應鏈 trace_asset_in_leagersite 資料表被篡改");
             }else if(system_error_message_obj.innerText != ""){
                 alert(system_error_message_obj.innerText);
             }
@@ -149,7 +149,7 @@
                 button_obj = document.createElement("button");
                 button_obj.setAttribute("type","button");
                 button_obj.setAttribute("onclick",'get_switch_site_data("'+"{{ $leager_site_table_data[$i]['id'] }}"+'")');
-                button_obj.innerText="查詢供應鏈大點資料";
+                button_obj.innerText="查詢供應鏈階段資料";
                 Td.appendChild(button_obj);
 
                 Td = Tr.insertCell(Tr.cells.length);

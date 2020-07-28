@@ -18,6 +18,13 @@ use App\Jobs\Testjob;
 
 class TraceController extends Controller
 {
+    private $django_ip;
+
+    public function __construct(){
+        // $django_ip = '172.20.10.12';
+        // $django_ip = '172.16.112.109';
+        $this->django_ip = '192.168.1.75';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +54,7 @@ class TraceController extends Controller
             $file = fopen($filename,"a+");
             if((strcmp($trace_asset_in_leagersite_datas_jaon_decode['error'],'ok')!=0)){
                 //只會回填系統錯誤，不會回填error log檔，不然會太複雜，需要回填error可以可用手動驗證
-                fwrite($file,"trace_asset_in_leagersite 資料表被串改\n");
+                fwrite($file,"trace_asset_in_leagersite 資料表被篡改\n");
                 fwrite($file,"error_message:".$trace_asset_in_leagersite_datas_jaon_decode['error']."\n");
             }
             fclose($file);
@@ -114,8 +121,8 @@ class TraceController extends Controller
                 $switch_site_data_validation_result_decode = json_decode($switch_site_data_validation_result, true);
                 if((strcmp($switch_site_data_validation_result_decode['error'],'ok')!=0)){
                     //只會回填系統錯誤，不會回填error log檔，不然會太複雜，需要回填error可以可用手動驗證
-                    fwrite($file,"switch_site 資料表被串改\n");
-                    fwrite($file,"switch_site 資料表被串改"+$switch_site_datas[$count_switch_site_datas]['_id']+"\n");
+                    fwrite($file,"switch_site 資料表被篡改\n");
+                    fwrite($file,"switch_site 資料表被篡改"+$switch_site_datas[$count_switch_site_datas]['_id']+"\n");
                     fwrite($file,"error_message:".$switch_site_data_validation_result_decode['error']."\n");
                 }
 
@@ -129,8 +136,8 @@ class TraceController extends Controller
                     $sensor_group_data_validation_result = $this->validation_sensor_group_table($sensor_group_datas);
                     $sensor_group_data_validation_result_decode = json_decode($sensor_group_data_validation_result, true);
                     if((strcmp($sensor_group_data_validation_result_decode['error'],'ok')!=0)){
-                        fwrite($file,"sensor_group 資料表被串改\n");
-                        fwrite($file,"sensor_group 資料表被串改"+$sensor_group['_id']+"\n");
+                        fwrite($file,"sensor_group 資料表被篡改\n");
+                        fwrite($file,"sensor_group 資料表被篡改"+$sensor_group['_id']+"\n");
                     }
                     for($count_switch_site_data_asset_RFID=0;$count_switch_site_data_asset_RFID<count($switch_site_datas[$count_switch_site_datas]['asset_RFID_array']);$count_switch_site_data_asset_RFID++){
                         $switch_site_table_data[$count_switch_site_datas][] = array(  "leager_site" => urlencode((string)$switch_site_datas[$count_switch_site_datas]['leager_site']),
@@ -314,7 +321,7 @@ class TraceController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $response = $client->post('http://192.168.1.75:8000/check_hmac/process_background_trace_back_job_table/create_background_data',[
+        $response = $client->post('http://'.$this->django_ip.':8000/check_hmac/process_background_trace_back_job_table/create_background_data',[
             'json' => [
             'leager_site'=>$leager_site_table_data_id,
             'error_pos'=>$recode_cur_switch_site_pos,
@@ -495,7 +502,7 @@ class TraceController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $response = $client->post('http://192.168.1.75:8000/ethereum_site/process_ethereum_data/main',[
+        $response = $client->post('http://'.$this->django_ip.':8000/ethereum_site/process_ethereum_data/main',[
             'json' => [
             'asset_ID'=>$RFID_SENSOR,
             'test_iot_data_array'=>$ldr_data_string,
@@ -627,7 +634,7 @@ class TraceController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $response = $client->post('http://192.168.1.75:8000/video/validation_video/main',[
+        $response = $client->post('http://'.$this->django_ip.':8000/video/validation_video/main',[
             'json' => [
             'test_video_hash'=>$video_hash,
             'test_frame_hash_array'=>$frame_hash_string,
@@ -657,7 +664,7 @@ class TraceController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $response = $client->post('http://192.168.1.75:8000/check_hmac/check/hmac',[
+        $response = $client->post('http://'.$this->django_ip.':8000/check_hmac/check/hmac',[
             'json' => [
             'leager_site_name'=>'leager_site',
             'leager_site_type'=>'1',
@@ -705,7 +712,7 @@ class TraceController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $response = $client->post('http://192.168.1.75:8000/check_hmac/check/hmac',[
+        $response = $client->post('http://'.$this->django_ip.':8000/check_hmac/check/hmac',[
             'json' => [
             'asset_RFID_name'=>'asset_RFID',
             'asset_RFID_type'=>'1',
@@ -754,7 +761,7 @@ class TraceController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $response = $client->post('http://192.168.1.75:8000/check_hmac/check/hmac',[
+        $response = $client->post('http://'.$this->django_ip.':8000/check_hmac/check/hmac',[
             'json' => [
             'leager_site_name'=>'leager_site',
             'leager_site_type'=>'1',
@@ -904,7 +911,7 @@ class TraceController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $response = $client->post('http://192.168.1.75:8000/check_hmac/check/hmac',[
+        $response = $client->post('http://'.$this->django_ip.':8000/check_hmac/check/hmac',[
             'json' => [
             'leager_site_name'=>'leager_site',
             'leager_site_type'=>'1',
@@ -995,7 +1002,7 @@ class TraceController extends Controller
             'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $response = $client->post('http://192.168.1.75:8000/check_hmac/process_trace_asset_in_leagersite_table/update_trace_asset_in_leagersite',[
+        $response = $client->post('http://'.$this->django_ip.':8000/check_hmac/process_trace_asset_in_leagersite_table/update_trace_asset_in_leagersite',[
             'json' => [
             'determine_error'=>$determine_error,
             'recode_cur_switch_site_pos_array'=>$recode_cur_switch_site_pos,

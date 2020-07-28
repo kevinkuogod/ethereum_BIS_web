@@ -7,7 +7,7 @@
         <title>測試追朔</title>
     </head>
     <body>
-        <div style="color: #A830FF;border:2px #ccc solid;padding:1% 40% 1% 30%;margin:0% 0% 1% 0%;">追朔系統(供應鏈階段進出場查詢頁面)</div>
+        <div style="color: #A830FF;border:2px #ccc solid;padding:1% 40% 1% 30%;margin:0% 0% 1% 0%;">追溯系統(供應鏈階段進出場查詢頁面)</div>
         <div id="system_error_message"  style="color:#880000;border:2px #ccc solid;padding:10px;;margin:0% 0% 1% 0%;"></div>
         <div>
             <table class="table"  id="switch_table" border="1">

@@ -7,7 +7,7 @@
         <title>測試追朔</title>
     </head>
     <body>
-        <div style="color: #A830FF;border:2px #ccc solid;padding:1% 40% 1% 40%;margin:0% 0% 1% 0%;">追朔系統(RFID輸入頁面)</div>
+        <div style="color: #A830FF;border:2px #ccc solid;padding:1% 40% 1% 40%;margin:0% 0% 1% 0%;">追溯系統(RFID輸入頁面)</div>
         <div>
             <input type="text" placeholder="請輸入資產編號" id='asset_ID'></input>
             <button onclick="get_main_leager_site()">搜尋</button>
