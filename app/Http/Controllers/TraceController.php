@@ -19,11 +19,11 @@ use App\Jobs\Testjob;
 class TraceController extends Controller
 {
     private $django_ip;
+    private $validation_error_filename;
 
     public function __construct(){
-        // $django_ip = '172.20.10.12';
-        // $django_ip = '172.16.112.109';
-        $this->django_ip = '192.168.1.75';
+        $this->django_ip = '192.168.1.225';
+        $this->validation_error_filename = '/var/www/html/ethereum_BIS_web/storage/logs/validation_error.txt';
     }
     /**
      * Display a listing of the resource.
@@ -36,13 +36,10 @@ class TraceController extends Controller
     }
 
     public function list_asset_main_leager_site(Request $request){
-
         $trace_asset_in_leagersite_datas = DB::collection('trace_asset_in_leagersite')
                                           ->where('asset_RFID', $request->input("asset_ID_value"))
                                           ->get();
 
-
-        $filename = "/var/www/html/traceability_project/storage/logs/validation_error.txt";
         $leager_site_data = [];
         $leager_site_table_data = [];
 
@@ -51,7 +48,7 @@ class TraceController extends Controller
 
             $trace_asset_in_leagersite_datas_jaon = $this->validation_trace_asset_in_leagersite_table($trace_asset_in_leagersite_datas);
             $trace_asset_in_leagersite_datas_jaon_decode = json_decode($trace_asset_in_leagersite_datas_jaon, true);
-            $file = fopen($filename,"a+");
+            $file = fopen($this->validation_error_filename,"a+");
             if((strcmp($trace_asset_in_leagersite_datas_jaon_decode['error'],'ok')!=0)){
                 //只會回填系統錯誤，不會回填error log檔，不然會太複雜，需要回填error可以可用手動驗證
                 fwrite($file,"trace_asset_in_leagersite 資料表被篡改\n");
@@ -85,8 +82,8 @@ class TraceController extends Controller
 
         $error_str = "";
         //判斷是否有該檔案
-        if(file_exists($filename)){
-            $file = fopen($filename, "r");
+        if(file_exists($this->validation_error_filename)){
+            $file = fopen($this->validation_error_filename, "r");
             if($file != NULL){
                 //當檔案未執行到最後一筆，迴圈繼續執行(fgets一次抓一行)
                 while (!feof($file)) {
@@ -108,14 +105,13 @@ class TraceController extends Controller
                                 ->where('leager_site', $request->input("leager_site_id"))
                                 ->get();
     
-        $filename = "/var/www/html/traceability_project/storage/logs/validation_error.txt";
         $error_str = "";
         $switch_site_table_data = [];
         if(count($switch_site_datas) > 0){
             //只取第二筆資料，因為第一筆資料為進場資料
             $create_time = '';
             // $set_sensor_group_array_pos = 0;
-            $file = fopen($filename,"a+");
+            $file = fopen($this->validation_error_filename,"a+");
             for($count_switch_site_datas=0;$count_switch_site_datas<count($switch_site_datas);$count_switch_site_datas++){
                 $switch_site_data_validation_result = $this->validation_switch_site_table($switch_site_datas[$count_switch_site_datas]);
                 $switch_site_data_validation_result_decode = json_decode($switch_site_data_validation_result, true);
@@ -161,8 +157,8 @@ class TraceController extends Controller
             }
             fclose($file);
             //判斷是否有該檔案
-            if(file_exists($filename)){
-                $file = fopen($filename, "r");
+            if(file_exists($this->validation_error_filename)){
+                $file = fopen($this->validation_error_filename, "r");
                 if($file != NULL){
                     //當檔案未執行到最後一筆，迴圈繼續執行(fgets一次抓一行)
                     while (!feof($file)) {
