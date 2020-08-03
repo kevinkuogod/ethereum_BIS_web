@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"iotsensordata.failed_jobs"}],"uuid":"9f4b1d7c37d042988858a5b557e2bcaa"}

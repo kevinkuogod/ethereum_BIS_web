@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"iotsensordata.background_trace_back_job"}],"uuid":"6f23ba3809b74c5e8ed3bfe60fe20845"}

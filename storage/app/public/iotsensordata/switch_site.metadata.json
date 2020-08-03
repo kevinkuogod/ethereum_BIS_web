@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"iotsensordata.switch_site"}],"uuid":"abc73b3c61694e5ab60a711897a65a56"}
