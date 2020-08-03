@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <td class="col-md-1">第幾筆資料</td>
-                        <td class="col-md-2">光敏電阻資料</td>
+                        <td class="col-md-2">光感測器資料</td>
                         <td class="col-md-2">時間戳</td>
                         <td class="col-md-2">驗證訊息</td>
                     </tr>

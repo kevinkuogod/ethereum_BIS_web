@@ -106,7 +106,7 @@
         function re_validation_background(asset_RFID_id, leager_site_table_data_id, leager_site_pos){
             let system_error_message_obj = document.getElementById('system_error_message');
 
-            if((leager_site_id != 'null') && (system_error_message_obj.innerText == "")){
+            if((leager_site_table_data_id != 'null') && (system_error_message_obj.innerText == "")){
                 let form = new FormData();
                 let request = new ajaxRequest();
                 form.append("asset_RFID_ID", asset_RFID_id);
@@ -129,7 +129,7 @@
                         console.log(request.responseText);
                     }
                 }
-            }else if(leager_site_id == 'null'){
+            }else if(leager_site_table_data_id == 'null'){
                 alert("供應鏈 trace_asset_in_leagersite 資料表被篡改");
             }else if(system_error_message_obj.innerText != ""){
                 alert(system_error_message_obj.innerText);
